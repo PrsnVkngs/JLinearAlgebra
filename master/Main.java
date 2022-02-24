@@ -1,10 +1,45 @@
 package JLinearAlgebra.master;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		ArrayList<Float> temp = new ArrayList<Float>();
+		temp.add((float) 5);
+		temp.add((float) 5);
+		temp.add((float) 5);
+		temp.add((float) 5);
+		temp.add((float) 5);
+		
+		Matrix matrixA = new Matrix(temp);
+		
+		temp = new ArrayList<Float>();
+		
+		temp.add((float) 10);
+		temp.add((float) 10);
+		temp.add((float) 10);
+		temp.add((float) 10);
+		temp.add((float) 10);
+		
+		matrixA.addRow(temp);
+		
+		temp = new ArrayList<Float>();
+		
+		temp.add((float) 1);
+		temp.add((float) 2);
+		temp.add((float) 3);
+		temp.add((float) 4);
+		temp.add((float) 5);
+		
+		matrixA.addColumn(temp, true);
 
+		matrixA.displayMatrix();
+		
+		System.out.println("\n"+matrixA.getSize());
+		
 	}
 
 }

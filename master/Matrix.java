@@ -39,7 +39,9 @@ public class Matrix implements MatrixInterface{
 		matrix.add(matrixBody);
 		
 	}
-
+	
+	
+	
 	/***
 	 * This function, as its name implies, will perform matrix addition on the two matrices, where the reference object will be on the left side
 	 * of the addition, and the parameter object will be on the right side. It will not alter the {@link Matrix} in anyway, however, will return the result.
@@ -80,6 +82,107 @@ public class Matrix implements MatrixInterface{
 	public List<List<Float>> invert() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addRow(ArrayList<Float> row) {
+		
+		matrix.add(row);
+		
+	}
+
+	/***
+	 * The size of the parameter column must not exceed the size of the number of rows. 
+	 * The function will truncate the given list automatically to fit the number of rows. 
+	 * If the function is provided with the true value, it will add additional rows to compensate for the size of the given list. 
+	 * This will create new rows with zeros in them.  
+	 */
+	@Override
+	public void addColumn(ArrayList<Float> column, boolean addRows) {
+		
+		int saveIndex = 0;
+		Object[] floatArray = column.toArray();
+		
+		try {
+			
+			for(int i = 0; i < column.size(); i++) {
+				
+				saveIndex = i;
+				matrix.get(i).add(column.get(i));
+				
+			}
+			
+		}
+		catch (java.lang.IndexOutOfBoundsException outOfBounds) {
+			
+			//System.out.println(column.get(4));
+			
+			
+			ArrayList<Float> zeros = new ArrayList<Float>();
+			
+			for(int n = 0; n < this.getColumns()-1; n++ ) {
+				
+				zeros.add((float)0);
+				
+			}
+			
+			for ( int j = saveIndex; j < column.size(); j++ ) {
+				
+				System.out.println("index " + j);
+				this.addRow(zeros);
+				matrix.get(j).;
+				
+				System.out.println(floatArray[j]);
+				
+				
+			}
+			
+		}
+		catch (Exception e){
+			
+			System.out.println(e);
+			
+		}
+		
+		
+		
+		
+	}
+
+	@Override
+	public int getRows() {
+		// TODO Auto-generated method stub
+		return matrix.size();
+	}
+
+	@Override
+	public int getColumns() {
+		// TODO Auto-generated method stub
+		return matrix.get(0).size();
+	}
+
+	@Override
+	public String getSize() {
+		
+		return getRows() + "x" + getColumns();
+		
+	}
+
+	@Override
+	public void displayMatrix() {
+		
+		for (int i = 0; i < matrix.size(); i++ ) {
+			
+			for( int j = 0; j < this.getColumns(); j++) {
+				
+				System.out.print ( matrix.get(i).get(j) + "\t" );
+				
+			}
+			
+			System.out.println();
+			
+		}
+		
 	}
 
 }
