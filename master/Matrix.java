@@ -115,32 +115,43 @@ public class Matrix implements MatrixInterface{
 		}
 		catch (java.lang.IndexOutOfBoundsException outOfBounds) {
 			
-			//System.out.println(column.get(4));
-			
+			System.out.println("Not enough rows, adding more.");
 			
 			ArrayList<Float> zeros = new ArrayList<Float>();
 			
-			for(int n = 0; n < this.getColumns()-1; n++ ) {
+			int noColumns = this.getColumns();
+			
+			for(int n = 0; n < noColumns-1; n++ ) {
 				
 				zeros.add((float)0);
 				
 			}
 			
+			
+			
 			for ( int j = saveIndex; j < column.size(); j++ ) {
 				
 				System.out.println("index " + j);
+				zeros.add(column.get(j));
+				for(int p = 0; p < zeros.size(); p++) {
+					System.out.print(zeros.get(p) + "b");
+				}System.out.print("\t" + zeros.size());
 				this.addRow(zeros);
-				matrix.get(j).;
+				System.out.println("\n" + j + "\t" + floatArray[j]);
 				
-				System.out.println(floatArray[j]);
-				
-				
+				//zeros.remove(noColumns-1);
+				for(int p = 0; p < zeros.size(); p++) {
+					System.out.print(zeros.get(p) + "a");
+				}System.out.print("\t" + zeros.size());
+				System.out.println();				
 			}
+			
+			System.out.println();
 			
 		}
 		catch (Exception e){
 			
-			System.out.println(e);
+			System.out.println(e + "in addColumn");
 			
 		}
 		
@@ -171,18 +182,29 @@ public class Matrix implements MatrixInterface{
 	@Override
 	public void displayMatrix() {
 		
-		for (int i = 0; i < matrix.size(); i++ ) {
+		try {
 			
-			for( int j = 0; j < this.getColumns(); j++) {
+			for (int i = 0; i < matrix.size(); i++ ) {
 				
-				System.out.print ( matrix.get(i).get(j) + "\t" );
+				for( int j = 0; j < matrix.get(i).size(); j++) {
+					
+					System.out.print ( matrix.get(i).get(j) + "\t" );
+					
+				}
+				
+				System.out.println();
 				
 			}
 			
-			System.out.println();
+		}
+		catch(Exception e) {
+			
+			System.out.println(e + " in display matrix");
+			
+		}
 			
 		}
 		
-	}
+		
 
 }
