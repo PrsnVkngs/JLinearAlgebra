@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Matrix implements MatrixInterface{
 	
-	private List<ArrayList<Float>> matrix = new ArrayList<ArrayList<Float>>();
+	private ArrayList<ArrayList<Float>> matrix = new ArrayList<ArrayList<Float>>();
 	
 	/* Notes
 	 * currently, to get the class up and running, the constructors are pretty basic and only takes in already finished array list variables 
@@ -90,6 +90,20 @@ public class Matrix implements MatrixInterface{
 		matrix.add(row);
 		
 	}
+	
+	public ArrayList<Float> zeroRow(int length){
+		
+		ArrayList<Float> zeroes = new ArrayList<Float>();
+		
+		for(int i = 0; i < length; i++) {
+			
+			zeroes.add((float)0);
+			
+		}
+		
+		return zeroes;
+		
+	}
 
 	/***
 	 * The size of the parameter column must not exceed the size of the number of rows. 
@@ -101,7 +115,7 @@ public class Matrix implements MatrixInterface{
 	public void addColumn(ArrayList<Float> column, boolean addRows) {
 		
 		int saveIndex = 0;
-		Object[] floatArray = column.toArray();
+		//Object[] floatArray = column.toArray();
 		
 		try {
 			
@@ -117,36 +131,14 @@ public class Matrix implements MatrixInterface{
 			
 			System.out.println("Not enough rows, adding more.");
 			
-			ArrayList<Float> zeros = new ArrayList<Float>();
-			
-			int noColumns = this.getColumns();
-			
-			for(int n = 0; n < noColumns-1; n++ ) {
-				
-				zeros.add((float)0);
-				
-			}
-			
-			
+			int noColumns = this.getColumns();			
 			
 			for ( int j = saveIndex; j < column.size(); j++ ) {
 				
-				System.out.println("index " + j);
-				zeros.add(column.get(j));
-				for(int p = 0; p < zeros.size(); p++) {
-					System.out.print(zeros.get(p) + "b");
-				}System.out.print("\t" + zeros.size());
-				this.addRow(zeros);
-				System.out.println("\n" + j + "\t" + floatArray[j]);
+				this.addRow(zeroRow(noColumns-1));
+				matrix.get(j).add(column.get(j));
 				
-				//zeros.remove(noColumns-1);
-				for(int p = 0; p < zeros.size(); p++) {
-					System.out.print(zeros.get(p) + "a");
-				}System.out.print("\t" + zeros.size());
-				System.out.println();				
 			}
-			
-			System.out.println();
 			
 		}
 		catch (Exception e){

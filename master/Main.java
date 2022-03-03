@@ -33,12 +33,16 @@ public class Main {
 		temp.add((float) 3);
 		temp.add((float) 4);
 		temp.add((float) 5);
+		temp.add((float) 6);
+	
 		
 		matrixA.addColumn(temp, true);
 
-		matrixA.displayMatrix();
+		
 		
 		System.out.println("\n"+matrixA.getSize());
+		matrixA.displayMatrix();
+		
 		
 	}
 
