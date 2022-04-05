@@ -1,7 +1,6 @@
 package JLinearAlgebra.master;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class Matrix implements MatrixInterface{
@@ -47,7 +46,64 @@ public class Matrix implements MatrixInterface{
 	 * of the addition, and the parameter object will be on the right side. It will not alter the {@link Matrix} in anyway, however, will return the result.
 	 */
 	@Override
-	public List<List<Float>> matrixAddition(List<List<Float>> maxtrixB) {
+	public Matrix matrixAddition(Matrix matrixB) {
+		
+		Matrix temp = new Matrix();
+		temp.removeRow(0);
+		ArrayList<Float> row;
+		
+		if ( this.getSize().equals(matrixB.getSize()) ) {
+			
+			for ( int i = 0; i < this.getRows(); i++ ) {
+				row = new ArrayList<Float>();
+				for ( int j = 0; j < this.getColumns(); j++ ) {
+					
+					row.add( matrix.get(i).get(j) + matrixB.getElement(i,j) );
+					
+				}
+				temp.addRow(row);
+			}
+			return temp;
+		}
+		else {
+			
+			return null;
+			
+		}
+		
+		
+	}
+
+	@Override
+	public Matrix matrixSubtraction(Matrix matrixB) {
+			
+		Matrix temp = new Matrix();
+		temp.removeRow(0);
+		ArrayList<Float> row;
+		
+		if ( this.getSize().equals(matrixB.getSize()) ) {
+			
+			for ( int i = 0; i < this.getRows(); i++ ) {
+				row = new ArrayList<Float>();
+				for ( int j = 0; j < this.getColumns(); j++ ) {
+					
+					row.add( matrix.get(i).get(j) - matrixB.getElement(i,j) );
+					
+				}
+				temp.addRow(row);
+			}
+			return temp;
+		}
+		else {
+			
+			return null;
+			
+		}
+		
+	}
+
+	@Override
+	public Matrix matrixMultiplication(Matrix matrixB) {
 		
 		
 		
@@ -55,31 +111,13 @@ public class Matrix implements MatrixInterface{
 	}
 
 	@Override
-	public List<List<Float>> maxtrixSubtraction(List<List<Float>> matrixB) {
+	public Matrix transpose() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<List<Float>> matrixMultiplication(List<List<Float>> matrixB) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<List<Float>> matrixDivision(List<List<Float>> matrixB) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<List<Float>> transpose() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<List<Float>> invert() {
+	public Matrix invert() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -91,7 +129,7 @@ public class Matrix implements MatrixInterface{
 		
 	}
 	
-	public ArrayList<Float> zeroRow(int length){
+	private ArrayList<Float> zeroRow(int length){
 		
 		ArrayList<Float> zeroes = new ArrayList<Float>();
 		
@@ -147,8 +185,32 @@ public class Matrix implements MatrixInterface{
 			
 		}
 		
+	}
+	
+	//TODO Add out of bounds handling
+	@Override
+	public void removeRow(int index) {
 		
+		matrix.remove(index);
 		
+	}
+	
+	//TODO Add out of bounds handling	
+	@Override
+	public void removeColumn(int index) {
+		
+		for ( int r = 0; r < this.getRows(); r++ ) {
+			
+			matrix.get(r).remove(index);
+			
+		}
+		
+	}
+	
+	@Override
+	public float getElement(int row, int column) {
+		
+		return matrix.get(row).get(column);
 		
 	}
 
@@ -196,6 +258,26 @@ public class Matrix implements MatrixInterface{
 		}
 			
 		}
+	
+	/**
+	 * @param The matrix that you wish to compare. 
+	 * @return the function returns a 1 if the matrixes are of the same size, length and width, but will return 0 if they are not. 
+	 */
+	public int compareSize ( Matrix matrixB )  {
+		
+		if ( this.getSize().equals( matrixB.getSize() ) ) {
+			
+			return 1;
+			
+		}
+		else {
+			
+			return 0;
+			
+		}
+		
+		
+	}
 		
 		
 
